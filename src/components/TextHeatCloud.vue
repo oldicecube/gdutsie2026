@@ -25,7 +25,7 @@ function fontSize(value) {
 </script>
 
 <template>
-  <div class="text-cloud" aria-label="文字热力图">
+  <div class="text-cloud" aria-label="标签占比探索">
     <button
       v-for="item in items"
       :key="item.name"

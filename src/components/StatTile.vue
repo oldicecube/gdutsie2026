@@ -15,7 +15,7 @@ const props = defineProps({
   icon: { type: String, default: 'users' }
 })
 
-const icons = { MapPin, LocateFixed, School, GraduationCap, Users }
+const icons = { MapPin, LocateFixed, School, GraduationCap, Users, 'map-pin': MapPin, 'locate-fixed': LocateFixed, school: School, 'graduation-cap': GraduationCap, users: Users }
 const iconComponent = computed(() => icons[props.icon] ?? Users)
 </script>
 

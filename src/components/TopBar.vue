@@ -3,10 +3,10 @@ import { Github } from 'lucide-vue-next'
 
 const sections = [
   { id: 'overview', label: '总览' },
-  { id: 'profile', label: '基础画像' },
-  { id: 'programs', label: '专业' },
+  { id: 'profile', label: '第一印象' },
+  { id: 'programs', label: '学习方向' },
   { id: 'birthdays', label: '生日' },
-  { id: 'talents', label: '特长' },
+  { id: 'talents', label: '兴趣技能' },
   { id: 'special', label: '特色' }
 ]
 </script>
@@ -17,8 +17,8 @@ const sections = [
       <div class="brand">
         <span>2026</span>
         <div>
-          <strong>新生数据看板</strong>
-          <p>国际教育学院 · 部分数据</p>
+          <strong>新生画像 · 2026</strong>
+          <p>国际教育学院 | 数据可视化</p>
         </div>
       </div>
       <nav class="top-nav" aria-label="页面导航">
@@ -32,7 +32,7 @@ const sections = [
           rel="noreferrer"
         >
           <Github :size="17" />
-          <span>GitHub</span>
+          <span>项目仓库</span>
         </a>
       </nav>
     </div>

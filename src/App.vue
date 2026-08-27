@@ -1,7 +1,8 @@
-﻿<script setup>
+<script setup>
 import { computed, ref } from 'vue'
 import {
   Activity,
+  ArrowDown,
   Cake,
   GraduationCap,
   Sparkles,
@@ -216,12 +217,32 @@ const selectedEthnicItem = computed(
   <TopBar />
 
   <main class="page-shell">
-    <section id="overview" class="section">
+    <section class="hero-section">
+      <div class="hero-copy">
+        <p class="hero-kicker">INTERNATIONAL EDUCATION COLLEGE · 2026</p>
+        <h1>你好，<em>2026</em><br />我们在这里相遇</h1>
+        <p class="hero-lede">一份关于新同学的公开数据画像，从来处、专业到兴趣与生日，看看我们共同组成的这一届。</p>
+        <a class="hero-action" href="#profile">开始认识我们 <ArrowDown :size="17" /></a>
+      </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <div class="orbit-ring ring-one"></div>
+        <div class="orbit-ring ring-two"></div>
+        <div class="orbit-core">
+          <span>2026</span>
+          <strong>新生<br />画像</strong>
+        </div>
+        <span class="orbit-label label-one">兴趣</span>
+        <span class="orbit-label label-two">相遇</span>
+        <span class="orbit-label label-three">远方</span>
+      </div>
+    </section>
+
+    <section id="overview" class="section intro-section">
       <div class="section-head">
         <span class="section-icon"><BarChart3 :size="24" /></span>
         <div>
-          <p>数据口径</p>
-          <h2>当前“部分”新生数据</h2>
+          <p>资料一览</p>
+          <h2>先从这份资料，看见我们的共同点</h2>
         </div>
       </div>
 
@@ -247,29 +268,29 @@ const selectedEthnicItem = computed(
       <div class="section-head">
         <span class="section-icon"><Users :size="24" /></span>
         <div>
-          <p>基础画像</p>
-          <h2>性别、政治面貌与来源地</h2>
+          <p>第一印象</p>
+          <h2>来自哪里，是什么样的人</h2>
         </div>
       </div>
 
       <div class="chart-grid">
-        <NeuCard title="性别" subtitle="常规人群指标仅呈现比例" badge="环形图">
+        <NeuCard title="性别构成" subtitle="这一届同学的性别比例" badge="比例">
           <EChart :option="genderOption" height="320px" />
         </NeuCard>
 
-        <NeuCard title="政治面貌" subtitle="常规人群指标仅呈现比例" badge="玫瑰图">
+        <NeuCard title="政治面貌" subtitle="这一届同学的政治面貌比例" badge="比例">
           <EChart :option="politicalOption" height="320px" />
         </NeuCard>
 
-        <NeuCard title="省份来源" subtitle="广东占比最高" badge="条形图">
+        <NeuCard title="省份来源" subtitle="来自 7 个省级地区的同学" badge="占比">
           <EChart :option="provinceOption" height="330px" />
         </NeuCard>
 
-        <NeuCard title="考生地区" subtitle="按城市/区域汇总，居前部分" badge="条形图">
+        <NeuCard title="生源地区" subtitle="按城市与区域汇总的来源比例" badge="占比">
           <EChart :option="regionOption" height="330px" />
         </NeuCard>
 
-        <NeuCard title="考生类别" subtitle="常规人群指标仅呈现比例" badge="条形图">
+        <NeuCard title="考生类别" subtitle="应届与往届、城乡来源的比例" badge="占比">
           <EChart :option="candidateOption" height="300px" />
         </NeuCard>
       </div>
@@ -279,12 +300,12 @@ const selectedEthnicItem = computed(
       <div class="section-head">
         <span class="section-icon"><GraduationCap :size="24" /></span>
         <div>
-          <p>录取专业项目</p>
-          <h2>专业项目分布</h2>
+          <p>学习方向</p>
+          <h2>我们将在这里学习什么</h2>
         </div>
       </div>
 
-      <NeuCard title="录取专业项目" subtitle="9 个专业项目占比" badge="条形图">
+      <NeuCard title="专业项目分布" subtitle="9 个专业项目的选择比例" badge="占比">
         <EChart :option="programOption" height="430px" />
       </NeuCard>
     </section>
@@ -293,28 +314,28 @@ const selectedEthnicItem = computed(
       <div class="section-head">
         <span class="section-icon"><Cake :size="24" /></span>
         <div>
-          <p>生日数据</p>
-          <h2>出生年份、月份与重复生日</h2>
+          <p>生日档案</p>
+          <h2>同年同月，也有同一天</h2>
         </div>
       </div>
 
       <div class="chart-grid">
-        <NeuCard title="出生年份" subtitle="仅保留 2007、2008" badge="环形图">
+        <NeuCard title="出生年份" subtitle="2007 与 2008 年出生的同学" badge="比例">
           <EChart :option="birthYearOption" height="320px" />
         </NeuCard>
 
-        <NeuCard title="出生月份" subtitle="全部 12 个月" badge="面积图">
+        <NeuCard title="出生月份" subtitle="一年十二个月，都有我们的生日" badge="月份">
           <EChart :option="birthMonthOption" height="320px" />
         </NeuCard>
       </div>
 
       <NeuCard
         title="重复生日日期"
-        subtitle="78 个生日日期至少重复 2 次；字号随重复人数增大"
-        badge="文字热力图"
+        subtitle="多个生日日期迎来不止一位同学，字号越大代表同日生日人数越多"
+        badge="日期探索"
       >
         <p v-if="selectedBirthdayItem" class="selection-note">
-          当前选中：{{ selectedBirthdayItem.name }}，{{ selectedBirthdayItem.value }} 人
+          {{ selectedBirthdayItem.name }} · {{ selectedBirthdayItem.value }} 位同学同日生日
         </p>
         <TextHeatCloud
           :items="birthdayCloudItems"
@@ -326,12 +347,12 @@ const selectedEthnicItem = computed(
       </NeuCard>
 
       <div class="chart-grid">
-        <NeuCard title="重复生日明细" subtitle="按同一日期重复人数分组" badge="数据表">
+        <NeuCard title="重复生日明细" subtitle="按同日生日人数从多到少排列，相同人数合并展示" badge="日期清单">
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>重复人数</th>
+                  <th>同日生日</th>
                   <th>日期</th>
                 </tr>
               </thead>
@@ -345,7 +366,7 @@ const selectedEthnicItem = computed(
           </div>
         </NeuCard>
 
-        <NeuCard title="特殊日期生日" subtitle="有生日记录的节日/纪念日" badge="数据表">
+        <NeuCard title="特殊日期生日" subtitle="生日与特别日子相遇的比例" badge="节日清单">
           <div class="special-date-list">
             <div v-for="item in specialDates" :key="item.name" class="special-date-row">
               <span><strong>{{ item.date }}</strong>{{ item.name }}</span>
@@ -360,23 +381,23 @@ const selectedEthnicItem = computed(
       <div class="section-head">
         <span class="section-icon"><Sparkles :size="24" /></span>
         <div>
-          <p>新生特长</p>
-          <h2>特长标签与占比</h2>
+          <p>兴趣与技能</p>
+          <h2>每个人都有自己的闪光点</h2>
         </div>
       </div>
 
       <div class="chart-grid">
-        <NeuCard title="特长标签" subtitle="同一人可同时命中多个标签" badge="雷达图">
+        <NeuCard title="兴趣技能全景" subtitle="同一位同学可以拥有多个标签" badge="兴趣全景">
           <EChart :option="talentRadarOption" height="420px" />
         </NeuCard>
 
         <NeuCard
-          title="特长文字热力图"
-          subtitle="字号越大，占比越高"
-          badge="文字热力图"
+          title="兴趣技能热力图"
+          subtitle="字号越大，资料中出现的比例越高"
+          badge="日期探索"
         >
           <p v-if="selectedTalentItem" class="selection-note">
-            当前选中：{{ selectedTalentItem.name }}，{{ selectedTalentItem.value }}%
+            {{ selectedTalentItem.name }} · {{ selectedTalentItem.value }}%
           </p>
           <TextHeatCloud
             :items="talents"
@@ -393,13 +414,13 @@ const selectedEthnicItem = computed(
       <div class="section-head">
         <span class="section-icon"><Activity :size="24" /></span>
         <div>
-          <p>小众特色数据</p>
-          <h2>民族、外省来源与补充数据</h2>
+          <p>藏在数据里的小惊喜</p>
+          <h2>我们来自五湖四海，也各有不同</h2>
         </div>
       </div>
 
       <div class="chart-grid">
-        <NeuCard title="民族构成" subtitle="少数民族类别与占比" badge="文字热力图">
+        <NeuCard title="民族构成" subtitle="13 个民族，共同组成这一届同学" badge="民族探索">
           <div class="mini-facts">
             <span><strong>19 人</strong>少数民族新生</span>
             <span><strong>5.1%</strong>少数民族占比</span>
@@ -407,8 +428,8 @@ const selectedEthnicItem = computed(
             <span><strong>13 个</strong>民族合计</span>
           </div>
           <p v-if="selectedEthnicItem" class="selection-note">
-            当前选中：{{ selectedEthnicItem.name }}，
-            {{ selectedEthnicItem.count === null ? '人数不展示' : `${selectedEthnicItem.count} 人` }}，
+            {{ selectedEthnicItem.name }} ·
+            {{ selectedEthnicItem.count === null ? '具体人数未列出' : `${selectedEthnicItem.count} 人` }}，
             {{ selectedEthnicItem.value }}%
           </p>
           <TextHeatCloud
@@ -420,7 +441,7 @@ const selectedEthnicItem = computed(
           />
         </NeuCard>
 
-        <NeuCard title="民族明细" subtitle="少数民族保留具体人数，汉族仅保留比例" badge="数据表">
+        <NeuCard title="民族明细" subtitle="少数民族数据呈现人数，汉族呈现比例" badge="民族清单">
           <div class="table-wrap">
             <table>
               <thead>
@@ -443,15 +464,15 @@ const selectedEthnicItem = computed(
       </div>
 
       <div class="chart-grid">
-        <NeuCard title="外省生源" subtitle="广东以外省份来源" badge="数据卡">
+        <NeuCard title="来自广东之外" subtitle="跨越 6 个省份与直辖市而来" badge="来源故事">
           <div class="fact-grid">
             <div class="fact-card">
               <strong>{{ nonLocalStudents.outsideGuangdong }}%</strong>
-              <span>广东以外新生占比</span>
+              <span>广东之外的同学</span>
             </div>
             <div class="fact-card">
               <strong>{{ nonLocalStudents.places.length }} 个</strong>
-              <span>外省/直辖市来源</span>
+              <span>省份与直辖市来源</span>
             </div>
           </div>
           <div class="chip-row">
@@ -459,17 +480,17 @@ const selectedEthnicItem = computed(
           </div>
         </NeuCard>
 
-        <NeuCard title="最集中的细分考生地区" subtitle="考生地区是原始字段" badge="条形图">
+        <NeuCard title="同城相遇" subtitle="来源更集中的细分地区比例" badge="地区分布">
           <EChart :option="detailedRegionOption" height="340px" />
         </NeuCard>
       </div>
 
       <div class="chart-grid">
-        <NeuCard title="星座分布" subtitle="全部 12 个星座" badge="条形图">
+        <NeuCard title="星座分布" subtitle="十二星座在这一届的比例" badge="星座地图">
           <EChart :option="zodiacOption" height="380px" />
         </NeuCard>
 
-        <NeuCard title="姓氏与姓名结构" subtitle="姓氏类别与文本长度" badge="数据卡 + 条形图">
+        <NeuCard title="名字里的多样性" subtitle="姓氏、姓名长度与同名观察" badge="姓名观察">
           <div class="fact-grid compact">
             <div class="fact-card">
               <strong>{{ surnameStructure.categories }}</strong>
@@ -477,15 +498,15 @@ const selectedEthnicItem = computed(
             </div>
             <div class="fact-card">
               <strong>{{ surnameStructure.singletonCategoryRate }}%</strong>
-              <span>仅出现一次的姓氏类别占比</span>
+              <span>只出现一次的姓氏类别</span>
             </div>
             <div class="fact-card">
               <strong>{{ surnameStructure.singletonStudentRate }}%</strong>
-              <span>对应新生占比</span>
+              <span>对应同学比例</span>
             </div>
             <div class="fact-card">
               <strong>{{ surnameStructure.sameFullNameRate }}%</strong>
-              <span>完全同名新生占比</span>
+              <span>完全同名比例</span>
             </div>
           </div>
           <DataBars :items="surnames" />
@@ -495,31 +516,31 @@ const selectedEthnicItem = computed(
       </div>
 
       <div class="chart-grid">
-        <NeuCard title="毕业学校来源分布" subtitle="来源学校数量与居前学校" badge="条形图">
+        <NeuCard title="从哪所高中出发" subtitle="来自 206 所毕业学校，展示来源更集中的学校" badge="高中地图">
           <div class="fact-grid compact">
             <div class="fact-card">
               <strong>{{ schoolStructure.total }}</strong>
-              <span>毕业学校名称类别</span>
+              <span>毕业学校数量</span>
             </div>
             <div class="fact-card">
               <strong>{{ schoolStructure.singletonSchoolRate }}%</strong>
-              <span>单一新生来源学校占比</span>
+              <span>只来了一位同学的学校</span>
             </div>
             <div class="fact-card">
               <strong>{{ schoolStructure.singletonStudentRate }}%</strong>
-              <span>这部分学校来源新生占比</span>
+              <span>来自这些学校的同学</span>
             </div>
           </div>
           <EChart :option="schoolOption" height="350px" />
         </NeuCard>
 
-        <NeuCard title="同类高校公开新生数据中的已使用维度" subtitle="当前数据对应结果" badge="数据表">
+        <NeuCard title="数据观察维度" subtitle="这份新生画像所呈现的公开数据" badge="观察清单">
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
                   <th>公开维度</th>
-                  <th>当前数据对应结果</th>
+                  <th>页面呈现</th>
                 </tr>
               </thead>
               <tbody>
@@ -533,7 +554,7 @@ const selectedEthnicItem = computed(
         </NeuCard>
       </div>
 
-      <NeuCard title="同类高校公开推文参考来源" subtitle="用于数据维度参考" badge="参考来源">
+      <NeuCard title="数据来源与参考" subtitle="数据整理自学院资料，观察维度参考高校公开新生数据" badge="资料来源">
         <div class="reference-list">
           <a
             v-for="item in references"
@@ -551,9 +572,8 @@ const selectedEthnicItem = computed(
     </section>
 
     <footer class="page-footer">
-      <p>数据来源：当前 Excel 文件中的“部分”新生记录。</p>
-      <p>静态展示页面 · Vue 3 + Vite + ECharts</p>
+      <p>数据来源：国际教育学院 2026 新生资料（已收集的公开信息）。</p>
+      <p>国际教育学院 · 2026 新生画像</p>
     </footer>
   </main>
 </template>
-
