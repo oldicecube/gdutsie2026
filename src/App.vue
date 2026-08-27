@@ -219,17 +219,17 @@ const selectedEthnicItem = computed(
   <main class="page-shell">
     <section class="hero-section">
       <div class="hero-copy">
-        <p class="hero-kicker">INTERNATIONAL EDUCATION COLLEGE · 2026</p>
-        <h1>你好，<em>2026</em><br />我们在这里相遇</h1>
-        <p class="hero-lede">一份关于新同学的公开数据画像，从来处、专业到兴趣与生日，看看我们共同组成的这一届。</p>
-        <a class="hero-action" href="#profile">开始认识我们 <ArrowDown :size="17" /></a>
+        <p class="hero-kicker">INTERNATIONAL EDUCATION COLLEGE <span>/</span> 2026</p>
+        <h1>认识 <em>2026</em><br />从数据开始</h1>
+        <p class="hero-lede">广东工业大学国际教育学院 2026级新生数据面向公开展示。我们从生源、学习方向、生日与兴趣技能等维度，记录这一届同学的多元面貌。</p>
+        <a class="hero-action" href="#profile">浏览新生画像 <ArrowDown :size="17" /></a>
       </div>
       <div class="hero-orbit" aria-hidden="true">
         <div class="orbit-ring ring-one"></div>
         <div class="orbit-ring ring-two"></div>
         <div class="orbit-core">
           <span>2026</span>
-          <strong>新生<br />画像</strong>
+          <strong>新生<br />数据</strong>
         </div>
         <span class="orbit-label label-one">兴趣</span>
         <span class="orbit-label label-two">相遇</span>
@@ -268,7 +268,7 @@ const selectedEthnicItem = computed(
       <div class="section-head">
         <span class="section-icon"><Users :size="24" /></span>
         <div>
-          <p>第一印象</p>
+          <p>新生画像</p>
           <h2>来自哪里，是什么样的人</h2>
         </div>
       </div>
@@ -414,7 +414,7 @@ const selectedEthnicItem = computed(
       <div class="section-head">
         <span class="section-icon"><Activity :size="24" /></span>
         <div>
-          <p>藏在数据里的小惊喜</p>
+          <p>特色数据</p>
           <h2>我们来自五湖四海，也各有不同</h2>
         </div>
       </div>
