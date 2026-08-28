@@ -162,113 +162,6 @@ button, a { font-family: inherit; }
 .bar-fill { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #2876c4, #4ca9ce); transition: width .4s ease; }
 .bar-row:hover .bar-fill { background: linear-gradient(90deg, var(--orange), #f2af68); }
 .bar-value { color: var(--text); font-size: 12px; font-weight: 800; text-align: right; }
-.text-cloud {
-  position: relative;
-  min-height: 285px;
-  padding: 18px 12px 44px;
-  overflow: hidden;
-  isolation: isolate;
-  background:
-    radial-gradient(circle at 50% 44%, rgba(31, 119, 190, .07), transparent 48%),
-    linear-gradient(180deg, rgba(248, 252, 255, .88), rgba(242, 248, 253, .52));
-  border: 1px solid rgba(197, 217, 235, .72);
-  border-radius: 14px;
-}
-.text-cloud::before {
-  position: absolute;
-  inset: 12px;
-  z-index: -1;
-  border: 1px dashed rgba(95, 151, 193, .19);
-  border-radius: 10px;
-  content: '';
-  pointer-events: none;
-}
-.text-cloud__canvas {
-  display: block;
-  max-height: 326px;
-  overflow-y: auto;
-  padding: 20px 16px 24px;
-  color: var(--text);
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", "Microsoft YaHei", monospace;
-  font-size: 1rem;
-  line-height: 2.62;
-  text-align: center;
-  scrollbar-width: thin;
-  scrollbar-color: #a9c5dc transparent;
-}
-.text-cloud__canvas::-webkit-scrollbar { width: 7px; }
-.text-cloud__canvas::-webkit-scrollbar-thumb { border-radius: 99px; background: #a9c5dc; }
-.text-cloud__lead {
-  min-height: 52px;
-  padding: 4px 0 10px;
-  text-align: center;
-}
-.text-cloud__flow {
-  text-align: center;
-}
-.heat-word--lead {
-  margin-inline: 0;
-  box-shadow: 0 4px 12px rgba(19, 95, 184, .08), inset 0 -1px 0 rgba(255, 255, 255, .46);
-}
-.heat-word {
-  display: inline-flex;
-  align-items: center;
-  max-width: min(100%, 100%);
-  margin: 0 3px 8px;
-  padding: 1px 5px 2px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  color: var(--heat-color);
-  background: var(--heat-bg);
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .4);
-  cursor: pointer;
-  font-size: var(--heat-size);
-  font-weight: var(--heat-weight);
-  line-height: 1.35;
-  text-align: center;
-  text-decoration: none;
-  overflow-wrap: anywhere;
-  transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, filter .16s ease;
-  vertical-align: middle;
-}
-.heat-word:hover, .heat-word:focus-visible, .heat-word.active {
-  z-index: 1;
-  border-color: rgba(19, 95, 184, .48);
-  box-shadow: 0 5px 14px rgba(19, 95, 184, .18), inset 0 -1px 0 rgba(255, 255, 255, .62);
-  filter: saturate(1.16) brightness(.98);
-  outline: none;
-  transform: translateY(-2px) scale(1.025);
-}
-.heat-hover-tip {
-  position: absolute;
-  right: 13px;
-  bottom: 11px;
-  left: 13px;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px 12px;
-  pointer-events: none;
-}
-.heat-hover-tip strong, .heat-hover-tip span {
-  display: inline-flex;
-  align-items: baseline;
-  max-width: 100%;
-  padding: 6px 10px;
-  border: 1px solid rgba(169, 197, 220, .9);
-  border-radius: 5px;
-  color: var(--text);
-  background: rgba(255, 255, 255, .95);
-  box-shadow: 0 7px 18px rgba(32, 61, 92, .12);
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.3;
-}
-.heat-hover-tip span { margin-left: -8px; color: var(--muted); font-weight: 600; }
-.heat-tip-enter-active, .heat-tip-leave-active { transition: opacity .15s ease, transform .15s ease; }
-.heat-tip-enter-from, .heat-tip-leave-to { opacity: 0; transform: translateY(4px); }
 .mini-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin-bottom: 13px; }
 .mini-facts span { display: grid; gap: 1px; padding: 9px 11px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--panel-soft); color: var(--muted); font-size: 11px; font-weight: 650; }
 .mini-facts strong { color: var(--blue); font-size: 16px; line-height: 1.2; }
@@ -375,15 +268,6 @@ body {
   min-width: 0;
   overscroll-behavior-inline: contain;
   -webkit-overflow-scrolling: touch;
-}
-
-.text-cloud__canvas {
-  min-width: 0;
-  scrollbar-gutter: stable;
-}
-
-.heat-word {
-  min-width: 0;
 }
 
 @media (max-width: 900px) {
@@ -494,45 +378,6 @@ body {
     min-height: 0;
   }
 
-  /* Match the reference token-style heatmap while giving dense datasets a
-     predictable scroll area instead of letting a card grow off-screen. */
-  .text-cloud {
-    min-height: 0;
-    padding: 10px 8px 38px;
-  }
-
-  .text-cloud::before {
-    inset: 8px;
-  }
-
-  .text-cloud__canvas {
-    max-height: clamp(220px, 74vw, 310px);
-    padding: 14px 8px 20px;
-    line-height: 2.15;
-  }
-
-  .heat-word {
-    margin-inline: 2px;
-    margin-bottom: 6px;
-    padding: 2px 5px;
-    line-height: 1.25;
-  }
-
-  .heat-hover-tip {
-    right: 8px;
-    bottom: 7px;
-    left: 8px;
-    flex-wrap: wrap;
-    gap: 2px 8px;
-    padding-inline: 4px;
-  }
-
-  .heat-hover-tip strong,
-  .heat-hover-tip span {
-    max-width: 100%;
-    white-space: normal;
-  }
-
   .coverage-grid {
     gap: 9px;
   }
@@ -609,4 +454,75 @@ body {
   .hero-section {
     width: auto;
   }
+}
+
+/* ECharts word-cloud surface */
+.word-cloud-shell {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.word-cloud {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  min-height: 260px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(197, 217, 235, .72);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(31, 119, 190, .09), transparent 54%),
+    linear-gradient(180deg, rgba(248, 252, 255, .92), rgba(242, 248, 253, .58));
+}
+.word-cloud::before {
+  position: absolute;
+  inset: 12px;
+  z-index: -1;
+  border: 1px dashed rgba(95, 151, 193, .2);
+  border-radius: 11px;
+  content: '';
+  pointer-events: none;
+}
+.word-cloud canvas {
+  display: block;
+  max-width: 100%;
+}
+.word-cloud-tooltip {
+  display: grid;
+  gap: 2px;
+  min-width: 88px;
+}
+.word-cloud-tooltip strong {
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.35;
+}
+.word-cloud-tooltip span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.word-cloud__sr-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 620px) {
+  .word-cloud {
+    height: clamp(240px, 74vw, 300px) !important;
+    min-height: 0;
+    border-radius: 12px;
+  }
+  .word-cloud::before { inset: 8px; }
+}
+
+@media (max-width: 359px) {
+  .word-cloud { height: 244px !important; }
 }

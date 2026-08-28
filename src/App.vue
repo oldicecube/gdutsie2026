@@ -12,7 +12,7 @@ import {
 import TopBar from './components/TopBar.vue'
 import NeuCard from './components/NeuCard.vue'
 import EChart from './components/EChart.vue'
-import TextHeatCloud from './components/TextHeatCloud.vue'
+import WordCloud from './components/WordCloud.vue'
 import StatTile from './components/StatTile.vue'
 import {
   birthMonths,
@@ -155,8 +155,8 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
           <EChart :option="politicalOption" height="320px" />
         </NeuCard>
 
-        <NeuCard title="省份来源" subtitle="来自不同省级地区的同学" badge="文字热力图">
-          <TextHeatCloud
+        <NeuCard title="省份来源" subtitle="来自不同省级地区的同学" badge="词云">
+          <WordCloud
             :items="provinces"
             metric="占比"
             unit="%"
@@ -165,8 +165,8 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
           />
         </NeuCard>
 
-        <NeuCard title="生源地区" subtitle="按城市与区域汇总的来源比例" badge="文字热力图">
-          <TextHeatCloud
+        <NeuCard title="生源地区" subtitle="按城市与区域汇总的来源比例" badge="词云">
+          <WordCloud
             :items="regions"
             metric="占比"
             unit="%"
@@ -186,8 +186,8 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
         </div>
       </div>
 
-      <NeuCard title="专业项目分布" subtitle="不同专业项目的选择比例，名称越突出代表占比越高" badge="文字热力图">
-        <TextHeatCloud
+      <NeuCard title="专业项目分布" subtitle="不同专业项目的选择比例，名称越突出代表占比越高" badge="词云">
+        <WordCloud
           :items="programs"
           metric="占比"
           unit="%"
@@ -216,8 +216,8 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
         </NeuCard>
       </div>
 
-      <NeuCard title="同天生日人数" subtitle="日期越突出，代表同一天生日的同学越多；悬浮可查看具体人数" badge="文字热力图">
-        <TextHeatCloud
+      <NeuCard title="同天生日人数" subtitle="日期越突出，代表同一天生日的同学越多；悬浮可查看具体人数" badge="词云">
+        <WordCloud
           :items="birthdayCloudItems"
           metric="同天生日人数"
           unit="人"
@@ -237,8 +237,8 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
         </div>
       </div>
 
-      <NeuCard title="兴趣与技能" subtitle="资料中出现的兴趣与技能标签，大小、颜色与位置共同反映占比" badge="文字热力图">
-        <TextHeatCloud
+      <NeuCard title="兴趣与技能" subtitle="资料中出现的兴趣与技能标签，大小、颜色与位置共同反映占比" badge="词云">
+        <WordCloud
           :items="talents"
           metric="占比"
           unit="%"
@@ -258,8 +258,8 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
       </div>
 
       <div class="chart-grid">
-        <NeuCard title="民族构成" subtitle="不同民族共同组成这一届新生" badge="文字热力图">
-          <TextHeatCloud
+        <NeuCard title="民族构成" subtitle="不同民族共同组成这一届新生" badge="词云">
+          <WordCloud
             :items="ethnicGroups"
             metric="占比"
             unit="%"
@@ -269,8 +269,8 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
           />
         </NeuCard>
 
-        <NeuCard title="星座分布" subtitle="十二星座在这一届的比例" badge="文字热力图">
-          <TextHeatCloud
+        <NeuCard title="星座分布" subtitle="十二星座在这一届的比例" badge="词云">
+          <WordCloud
             :items="zodiacSigns"
             metric="占比"
             unit="%"
@@ -279,8 +279,8 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
           />
         </NeuCard>
 
-        <NeuCard title="姓氏比例" subtitle="全部已整理姓氏的出现比例" badge="文字热力图">
-          <TextHeatCloud
+        <NeuCard title="姓氏比例" subtitle="全部已整理姓氏的出现比例" badge="词云">
+          <WordCloud
             :items="surnames"
             metric="占比"
             unit="%"
