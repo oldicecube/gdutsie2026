@@ -46,14 +46,14 @@ const birthdayCloudItems = computed(() =>
 
 const selectedItem = (key, items) => items.find(item => item.name === selected.value[key]) ?? null
 
-const palette = ['#135fb8', '#ef7d32', '#16a394', '#6f62c2', '#d39b20', '#d45c5c']
+const palette = ['#2457a6', '#d95f39', '#187f72', '#7a5aa6', '#d39b20', '#bd4652']
 const tooltip = {
   trigger: 'item',
-  backgroundColor: 'rgba(255, 255, 255, .98)',
-  borderColor: '#d7e2ee',
-  borderWidth: 1,
-  textStyle: { color: '#1c3553' },
-  extraCssText: 'box-shadow: 0 12px 30px rgba(32, 61, 92, .16); border-radius: 10px;'
+  backgroundColor: '#fffdf7',
+  borderColor: '#202b3d',
+  borderWidth: 2,
+  textStyle: { color: '#202b3d' },
+  extraCssText: 'box-shadow: 4px 4px 0 #202b3d; border-radius: 5px;'
 }
 
 function donutOption(items, colors = palette, roseType = undefined) {
@@ -65,31 +65,33 @@ function donutOption(items, colors = palette, roseType = undefined) {
       radius: ['48%', '76%'],
       center: ['50%', '50%'],
       ...(roseType ? { roseType } : {}),
-      label: { color: '#405875', formatter: '{b}\n{c}%' },
-      labelLine: { lineStyle: { color: '#b7c8d9' } },
-      itemStyle: { borderRadius: 9, borderColor: '#fff', borderWidth: 4 },
+      label: { color: '#39465a', formatter: '{b}\n{c}%' },
+      labelLine: { lineStyle: { color: '#8390a2', width: 2 } },
+      itemStyle: { borderRadius: 2, borderColor: '#fffdf7', borderWidth: 3 },
       emphasis: { scaleSize: 7, label: { fontWeight: 800 } },
       data: items
     }]
   }
 }
 
-const genderOption = computed(() => donutOption(gender, ['#135fb8', '#ef7d32']))
-const politicalOption = computed(() => donutOption(politicalStatus, ['#16a394', '#6f62c2'], 'radius'))
+const genderOption = computed(() => donutOption(gender, ['#2457a6', '#d95f39']))
+const politicalOption = computed(() => donutOption(politicalStatus, ['#187f72', '#7a5aa6'], 'radius'))
 const birthYearOption = computed(() => donutOption(
   birthYears.map(item => ({ ...item, name: item.name.slice(2, 4) })),
-  ['#135fb8', '#ef7d32']
+  ['#2457a6', '#d95f39']
 ))
 const birthMonthOption = computed(() => donutOption(birthMonths, [
-  '#135fb8', '#2d75c4', '#4b8bd0', '#67a1d8', '#81b8dc', '#8fc8be',
-  '#6fb6a0', '#ef7d32', '#e7944e', '#d9a65b', '#c79b63', '#9a8bc9'
+  '#2457a6', '#416fba', '#5b86c4', '#759bd0', '#8bb3c2', '#7fb8a4',
+  '#5f9c89', '#d95f39', '#df7c54', '#d39b20', '#b98d55', '#7a5aa6'
 ]))
 </script>
 
 <template>
   <TopBar />
 
-  <main class="page-shell">
+  <a class="skip-link" href="#main-content">&#x8DF3;&#x8F6C;&#x5230;&#x4E3B;&#x8981;&#x5185;&#x5BB9;</a>
+
+  <main id="main-content" class="page-shell">
     <section class="hero-section">
       <div class="hero-copy">
         <p class="hero-kicker">INTERNATIONAL EDUCATION COLLEGE <span>/</span> 2026</p>

@@ -14,7 +14,7 @@ const sections = [
 <template>
   <header class="top-bar">
     <div class="top-inner">
-      <a class="brand" href="#overview" aria-label="顴回看板总览">
+      <a class="brand" href="#overview" aria-label="返回看板总览">
         <span class="brand-mark">GDUT</span>
         <div>
           <strong>广东工业大学 · 国际教育学院</strong>

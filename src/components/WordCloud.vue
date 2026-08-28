@@ -19,8 +19,8 @@ let chart = null
 let resizeObserver = null
 
 const palette = [
-  '#155db1', '#147f93', '#ef7d32', '#6a55b7', '#d08a22',
-  '#238f78', '#c45261', '#3978bd', '#8d5baa', '#b27424'
+  '#2457a6', '#187f72', '#d95f39', '#7a5aa6', '#d39b20',
+  '#287f68', '#bd4652', '#416fba', '#8b68a8', '#b07832'
 ]
 
 const sortedItems = () => [...props.items]
@@ -44,7 +44,7 @@ function tooltipFormatter(params) {
 }
 
 function colorFor(item, index) {
-  if (props.selected && item.name === props.selected) return '#e8752f'
+  if (props.selected && item.name === props.selected) return '#d95f39'
   return item.textStyle?.color || palette[index % palette.length]
 }
 
@@ -65,11 +65,11 @@ function getOption() {
       trigger: 'item',
       confine: true,
       padding: [9, 12],
-      backgroundColor: 'rgba(255, 255, 255, .98)',
-      borderColor: '#d7e2ee',
-      borderWidth: 1,
-      textStyle: { color: '#1c3553', fontFamily: 'inherit' },
-      extraCssText: 'box-shadow: 0 12px 30px rgba(32, 61, 92, .16); border-radius: 10px;',
+      backgroundColor: '#fffdf7',
+      borderColor: '#202b3d',
+      borderWidth: 2,
+      textStyle: { color: '#202b3d', fontFamily: 'inherit' },
+      extraCssText: 'box-shadow: 4px 4px 0 #202b3d; border-radius: 5px;',
       formatter: tooltipFormatter
     },
     series: [{
@@ -95,8 +95,8 @@ function getOption() {
         focus: 'self',
         textStyle: {
           fontWeight: 900,
-          textShadowBlur: 12,
-          textShadowColor: 'rgba(19, 95, 184, .38)'
+          textShadowBlur: 8,
+          textShadowColor: 'rgba(32, 43, 61, .32)'
         }
       },
       data: items.map((item, index) => ({
