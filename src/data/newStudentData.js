@@ -206,16 +206,556 @@ export const surnameStructure = {
 }
 
 export const surnames = [
-  { name: '陈', value: 9.6 },
-  { name: '李', value: 6.1 },
-  { name: '张', value: 5.3 },
-  { name: '黄', value: 4.8 },
-  { name: '林', value: 4.5 },
-  { name: '刘', value: 3.2 },
-  { name: '朱', value: 2.4 },
-  { name: '王', value: 2.4 },
-  { name: '胡', value: 2.1 },
-  { name: '吴', value: 1.9 }
+  {
+    "name": "陈",
+    "count": 36,
+    "value": 9.6
+  },
+  {
+    "name": "李",
+    "count": 23,
+    "value": 6.1
+  },
+  {
+    "name": "张",
+    "count": 20,
+    "value": 5.3
+  },
+  {
+    "name": "黄",
+    "count": 18,
+    "value": 4.8
+  },
+  {
+    "name": "林",
+    "count": 17,
+    "value": 4.5
+  },
+  {
+    "name": "刘",
+    "count": 12,
+    "value": 3.2
+  },
+  {
+    "name": "朱",
+    "count": 9,
+    "value": 2.4
+  },
+  {
+    "name": "王",
+    "count": 9,
+    "value": 2.4
+  },
+  {
+    "name": "胡",
+    "count": 8,
+    "value": 2.1
+  },
+  {
+    "name": "吴",
+    "count": 7,
+    "value": 1.9
+  },
+  {
+    "name": "杨",
+    "count": 6,
+    "value": 1.6
+  },
+  {
+    "name": "邓",
+    "count": 6,
+    "value": 1.6
+  },
+  {
+    "name": "郑",
+    "count": 6,
+    "value": 1.6
+  },
+  {
+    "name": "何",
+    "count": 5,
+    "value": 1.3
+  },
+  {
+    "name": "卢",
+    "count": 5,
+    "value": 1.3
+  },
+  {
+    "name": "周",
+    "count": 5,
+    "value": 1.3
+  },
+  {
+    "name": "孙",
+    "count": 5,
+    "value": 1.3
+  },
+  {
+    "name": "廖",
+    "count": 5,
+    "value": 1.3
+  },
+  {
+    "name": "赵",
+    "count": 5,
+    "value": 1.3
+  },
+  {
+    "name": "郭",
+    "count": 5,
+    "value": 1.3
+  },
+  {
+    "name": "丁",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "冯",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "彭",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "曹",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "曾",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "梁",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "潘",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "肖",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "蔡",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "谢",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "邹",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "钟",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "高",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "黎",
+    "count": 4,
+    "value": 1.1
+  },
+  {
+    "name": "唐",
+    "count": 3,
+    "value": 0.8
+  },
+  {
+    "name": "宋",
+    "count": 3,
+    "value": 0.8
+  },
+  {
+    "name": "尹",
+    "count": 3,
+    "value": 0.8
+  },
+  {
+    "name": "罗",
+    "count": 3,
+    "value": 0.8
+  },
+  {
+    "name": "袁",
+    "count": 3,
+    "value": 0.8
+  },
+  {
+    "name": "谭",
+    "count": 3,
+    "value": 0.8
+  },
+  {
+    "name": "邱",
+    "count": 3,
+    "value": 0.8
+  },
+  {
+    "name": "余",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "叶",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "崔",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "徐",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "房",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "易",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "欧",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "洪",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "熊",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "程",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "苏",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "蒋",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "詹",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "许",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "金",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "马",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "龙",
+    "count": 2,
+    "value": 0.5
+  },
+  {
+    "name": "乔",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "于",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "付",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "代",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "任",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "伍",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "侯",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "俞",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "兰",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "关",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "匡",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "区",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "卞",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "吕",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "喻",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "姚",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "姜",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "宁",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "封",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "屈",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "库",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "庞",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "康",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "方",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "施",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "杜",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "柳",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "梅",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "段",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "汉",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "涂",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "甄",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "田",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "矢",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "祝",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "符",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "简",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "粟",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "纪",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "苗",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "莫",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "薛",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "贾",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "赖",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "路",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "连",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "邵",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "闫",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "陆",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "雷",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "颜",
+    "count": 1,
+    "value": 0.3
+  },
+  {
+    "name": "香",
+    "count": 1,
+    "value": 0.3
+  }
 ]
 
 export const nameLengths = [
