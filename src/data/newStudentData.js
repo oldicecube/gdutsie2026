@@ -758,6 +758,27 @@ export const surnames = [
   }
 ]
 
+export const namePhraseAnalysis = {
+  phrase: '广东工业大学国际教育学院',
+  totalStudents: 375,
+  distinctCharacters: 11,
+  coveredCharacters: 5,
+  canCompose: false,
+  characters: [
+    { name: '广', required: 1, count: 0, value: 0 },
+    { name: '东', required: 1, count: 1, value: 0.27 },
+    { name: '工', required: 1, count: 0, value: 0 },
+    { name: '业', required: 1, count: 1, value: 0.27 },
+    { name: '大', required: 1, count: 1, value: 0.27 },
+    { name: '学', required: 2, count: 1, value: 0.27 },
+    { name: '国', required: 1, count: 2, value: 0.53 },
+    { name: '际', required: 1, count: 0, value: 0 },
+    { name: '教', required: 1, count: 0, value: 0 },
+    { name: '育', required: 1, count: 0, value: 0 },
+    { name: '院', required: 1, count: 0, value: 0 }
+  ]
+}
+
 export const nameLengths = [
   { name: '3 个汉字', value: 93.9 },
   { name: '2 个汉字', value: 5.9 },

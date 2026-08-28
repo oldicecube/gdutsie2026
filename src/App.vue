@@ -26,6 +26,7 @@ import {
   provinces,
   regions,
   repeatedBirthdays,
+  namePhraseAnalysis,
   surnames,
   talents,
   zodiacSigns
@@ -289,6 +290,49 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
             :selected="selected.surname"
             @select="value => (selected.surname = value)"
           />
+        </NeuCard>
+
+        <NeuCard title="姓名里的学院印记" subtitle="按姓名中的每个汉字统计，不展示个人姓名" badge="字符统计">
+          <div class="phrase-analysis">
+            <div class="phrase-summary">
+              <p class="phrase-label">目标短语</p>
+              <strong class="phrase-text">{{ namePhraseAnalysis.phrase }}</strong>
+              <p class="phrase-result">
+                <span class="phrase-result__mark">✕</span>
+                暂不能完整凑出
+              </p>
+              <p class="phrase-note">
+                11 个不重复汉字中已有 {{ namePhraseAnalysis.coveredCharacters }} 个出现；“学”需 2 个，现有 1 个。
+              </p>
+            </div>
+
+            <div class="phrase-table-wrap">
+              <table class="phrase-table">
+                <thead>
+                  <tr>
+                    <th>字</th>
+                    <th>需用</th>
+                    <th>出现</th>
+                    <th>占比</th>
+                    <th>状态</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in namePhraseAnalysis.characters" :key="item.name">
+                    <th scope="row" class="phrase-character">{{ item.name }}</th>
+                    <td>{{ item.required }}</td>
+                    <td>{{ item.count }}</td>
+                    <td>{{ item.value.toFixed(2) }}%</td>
+                    <td>
+                      <span :class="['phrase-status', item.count >= item.required ? 'is-ready' : 'is-missing']">
+                        {{ item.count >= item.required ? '满足' : '不足' }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </NeuCard>
       </div>
     </section>
