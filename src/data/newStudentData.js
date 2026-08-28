@@ -47,17 +47,6 @@ export const candidateTypes = [
   { name: '农村往届', value: 0.8 }
 ]
 
-export const programs = [
-  { name: '计算机科学与技术（国际班）', value: 30.7 },
-  { name: '电气工程及其自动化（国际班）', value: 14.7 },
-  { name: '工商管理（中澳班）', value: 9.3 },
-  { name: '工商管理（国际班）', value: 9.3 },
-  { name: '机械设计制造及其自动化（中德班）', value: 9.3 },
-  { name: '机械设计制造及其自动化（国际班）', value: 8.0 },
-  { name: '机械设计制造及其自动化（机器人与机电一体化工程国际班）', value: 8.0 },
-  { name: '电气工程及其自动化（中英班）', value: 5.3 },
-  { name: '计算机科学与技术（中英班）', value: 5.3 }
-]
 
 export const birthYears = [
   { name: '2007 年', value: 36.5 },

@@ -5,7 +5,6 @@ import {
   ArrowDown,
   BarChart3,
   Cake,
-  GraduationCap,
   Sparkles,
   Users
 } from 'lucide-vue-next'
@@ -22,7 +21,6 @@ import {
   ethnicGroups,
   gender,
   politicalStatus,
-  programs,
   provinces,
   regions,
   repeatedBirthdays,
@@ -62,10 +60,19 @@ function donutOption(items, colors = palette, roseType = undefined) {
       radius: ['48%', '76%'],
       center: ['50%', '50%'],
       ...(roseType ? { roseType } : {}),
-      label: { color: '#39465a', formatter: '{b}\n{c}%' },
+      label: {
+        color: '#39465a',
+        formatter: '{b}\n{c}%',
+        width: 88,
+        overflow: 'breakAll',
+        lineHeight: 16,
+        fontSize: 11,
+        align: 'center'
+      },
       labelLine: { lineStyle: { color: '#8390a2', width: 2 } },
       itemStyle: { borderRadius: 2, borderColor: '#fffdf7', borderWidth: 3 },
       emphasis: { scaleSize: 7, label: { fontWeight: 800 } },
+      labelLayout: { hideOverlap: false, moveOverlap: 'shiftY' },
       data: items
     }]
   }
@@ -94,7 +101,7 @@ const zodiacOption = computed(() => donutOption(chineseZodiac, chineseZodiac.map
       <div class="hero-copy">
         <p class="hero-kicker">INTERNATIONAL EDUCATION COLLEGE <span>/</span> 2026</p>
         <h1>认识 <em>2026</em><br />从数据开始</h1>
-        <p class="hero-lede">广东工业大学国际教育学院 2026 级新生数据看板。让来源、方向、生日与兴趣，汇成一张清晰而有温度的集体画像。</p>
+        <p class="hero-lede">广东工业大学国际教育学院 2026 级新生数据看板。让来源、生日与兴趣，汇成一张清晰而有温度的集体画像。</p>
         <a class="hero-action" href="#profile">浏览新生画像 <ArrowDown :size="17" /></a>
       </div>
       <div class="hero-orbit" aria-hidden="true">
@@ -166,24 +173,6 @@ const zodiacOption = computed(() => donutOption(chineseZodiac, chineseZodiac.map
           />
         </NeuCard>
       </div>
-    </section>
-
-    <section id="programs" class="section">
-      <div class="section-head">
-        <span class="section-icon"><GraduationCap :size="24" /></span>
-        <div>
-          <p>学习方向</p>
-          <h2>在国际化项目中探索专业兴趣</h2>
-        </div>
-      </div>
-
-      <NeuCard title="专业项目分布" subtitle="不同专业项目的选择比例，名称越突出代表占比越高" badge="词云">
-        <WordCloud
-          :items="programs"
-          metric="占比"
-          unit="%"
-        />
-      </NeuCard>
     </section>
 
     <section id="birthdays" class="section">

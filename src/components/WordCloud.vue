@@ -46,11 +46,39 @@ function tooltipFormatter(params) {
 function getOption() {
   const items = sortedItems()
   const width = chartEl.value?.clientWidth || 600
+  const height = chartEl.value?.clientHeight || 320
   const dense = items.length > 40
+  const compact = items.length > 20
   const narrow = width < 500
+  const sparse = items.length <= 15
   const hasLongLabels = items.some(item => String(item.name).length > 10)
-  const maxSize = dense ? (narrow ? 28 : 46) : hasLongLabels ? (narrow ? 28 : 42) : (narrow ? 44 : 58)
-  const minSize = dense ? (narrow ? 9 : 12) : hasLongLabels ? (narrow ? 9 : 14) : (narrow ? 13 : 16)
+  const maxSize = dense
+    ? (narrow ? 35 : 54)
+    : hasLongLabels
+      ? (narrow ? 38 : 58)
+      : sparse
+        ? (narrow ? 62 : 84)
+        : (narrow ? 52 : 68)
+  const minSize = dense
+    ? (narrow ? 14 : 16)
+    : hasLongLabels
+      ? (narrow ? 13 : 16)
+      : (narrow ? 17 : 19)
+  const rotation = dense || narrow || hasLongLabels ? [0, 0] : [-25, 25]
+  const valueExtent = items.reduce(
+    (extent, item) => [Math.min(extent[0], Number(item.value)), Math.max(extent[1], Number(item.value))],
+    [Infinity, -Infinity]
+  )
+  const valueSpan = Math.max(valueExtent[1] - valueExtent[0], 0.0001)
+
+  // Give dense clouds a predictable floor so singleton surnames remain legible
+  // instead of being repeatedly shrunk by the layout engine.
+  const canvasPadding = dense ? 4 : 6
+
+  const getFontSize = item => {
+    const normalized = Math.pow((Number(item.value) - valueExtent[0]) / valueSpan, compact ? 0.62 : 0.78)
+    return Math.round(minSize + normalized * (maxSize - minSize))
+  }
 
   return {
     animation: false,
@@ -67,15 +95,15 @@ function getOption() {
     },
     series: [{
       type: 'wordCloud',
-      shape: width > 700 ? 'square' : 'circle',
-      left: 0,
-      top: 0,
-      width: '100%',
-      height: '100%',
+      shape: 'square',
+      left: canvasPadding,
+      top: canvasPadding,
+      width: Math.max(width - canvasPadding * 2, 0),
+      height: Math.max(height - canvasPadding * 2, 0),
       sizeRange: [minSize, maxSize],
-      rotationRange: hasLongLabels ? [0, 0] : [-25, 25],
+      rotationRange: rotation,
       rotationStep: 15,
-      gridSize: dense ? (narrow ? 3 : 5) : (narrow ? 5 : 8),
+      gridSize: 4,
       drawOutOfBound: false,
       shrinkToFit: true,
       layoutAnimation: false,
@@ -97,6 +125,7 @@ function getOption() {
         value: Number(item.value),
         textStyle: {
           ...(item.textStyle || {}),
+          fontSize: getFontSize(item),
           color: item.textStyle?.color || palette[index % palette.length],
           fontWeight: 750
         }

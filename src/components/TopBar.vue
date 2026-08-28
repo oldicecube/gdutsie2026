@@ -4,7 +4,6 @@ import { Github } from 'lucide-vue-next'
 const sections = [
   { id: 'overview', label: '总览' },
   { id: 'profile', label: '新生画像' },
-  { id: 'programs', label: '学习方向' },
   { id: 'birthdays', label: '生日档案' },
   { id: 'talents', label: '兴趣技能' },
   { id: 'special', label: '特色数据' }
