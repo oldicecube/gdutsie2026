@@ -1,10 +1,3 @@
-export const caveats = [
-  '本页面基于目前已收集到的部分新生资料，呈现这一届同学的多元面貌。',
-  '除特色数据外，页面中的群体信息均以比例呈现；不同标签可能存在交叉。',
-  '生日数据仅展示年份、月份和重复日期，不涉及个人身份信息。',
-  '特长标签来自资料中的关键词整理，仅用于呈现兴趣与技能的丰富度。'
-]
-
 export const coverage = [
   { label: '省份', value: 7, unit: '个', icon: 'map-pin' },
   { label: '考生地区', value: 98, unit: '个', icon: 'locate-fixed' },
@@ -84,6 +77,13 @@ export const birthMonths = [
   { name: '10 月', value: 9.1 },
   { name: '11 月', value: 8.3 },
   { name: '12 月', value: 8.5 }
+]
+
+export const chineseZodiac = [
+  { name: '鼠', emoji: '🐭', count: 198, value: 52.8, color: '#2457a6' },
+  { name: '猪', emoji: '🐷', count: 166, value: 44.3, color: '#d95f39' },
+  { name: '狗', emoji: '🐶', count: 9, value: 2.4, color: '#187f72' },
+  { name: '牛', emoji: '🐮', count: 2, value: 0.5, color: '#7a5aa6' }
 ]
 
 export const repeatedBirthdays = [
@@ -761,21 +761,14 @@ export const surnames = [
 export const namePhraseAnalysis = {
   phrase: '广东工业大学国际教育学院',
   totalStudents: 375,
-  distinctCharacters: 11,
+  matchingStudents: 6,
   coveredCharacters: 5,
-  canCompose: false,
   characters: [
-    { name: '广', required: 1, count: 0, value: 0 },
-    { name: '东', required: 1, count: 1, value: 0.27 },
-    { name: '工', required: 1, count: 0, value: 0 },
-    { name: '业', required: 1, count: 1, value: 0.27 },
-    { name: '大', required: 1, count: 1, value: 0.27 },
-    { name: '学', required: 2, count: 1, value: 0.27 },
-    { name: '国', required: 1, count: 2, value: 0.53 },
-    { name: '际', required: 1, count: 0, value: 0 },
-    { name: '教', required: 1, count: 0, value: 0 },
-    { name: '育', required: 1, count: 0, value: 0 },
-    { name: '院', required: 1, count: 0, value: 0 }
+    { name: '国', count: 2, value: 0.53 },
+    { name: '东', count: 1, value: 0.27 },
+    { name: '业', count: 1, value: 0.27 },
+    { name: '大', count: 1, value: 0.27 },
+    { name: '学', count: 1, value: 0.27 }
   ]
 }
 

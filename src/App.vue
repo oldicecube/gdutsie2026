@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import {
   Activity,
   ArrowDown,
@@ -17,7 +17,7 @@ import StatTile from './components/StatTile.vue'
 import {
   birthMonths,
   birthYears,
-  caveats,
+  chineseZodiac,
   coverage,
   ethnicGroups,
   gender,
@@ -32,8 +32,6 @@ import {
   zodiacSigns
 } from './data/newStudentData'
 
-const selected = ref({})
-
 const birthdayCloudItems = computed(() =>
   repeatedBirthdays
     .flatMap(group => group.dates.map(date => ({
@@ -44,8 +42,6 @@ const birthdayCloudItems = computed(() =>
     })))
     .sort((a, b) => b.value - a.value || a.name.localeCompare(b.name))
 )
-
-const selectedItem = (key, items) => items.find(item => item.name === selected.value[key]) ?? null
 
 const palette = ['#2457a6', '#d95f39', '#187f72', '#7a5aa6', '#d39b20', '#bd4652']
 const tooltip = {
@@ -85,6 +81,7 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
   '#2457a6', '#416fba', '#5b86c4', '#759bd0', '#8bb3c2', '#7fb8a4',
   '#5f9c89', '#d95f39', '#df7c54', '#d39b20', '#b98d55', '#7a5aa6'
 ]))
+const zodiacOption = computed(() => donutOption(chineseZodiac, chineseZodiac.map(item => item.color)))
 </script>
 
 <template>
@@ -133,11 +130,6 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
         />
       </div>
 
-      <div class="caveat-panel">
-        <ul>
-          <li v-for="item in caveats" :key="item">{{ item }}</li>
-        </ul>
-      </div>
     </section>
 
     <section id="profile" class="section">
@@ -163,8 +155,6 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
             :items="provinces"
             metric="占比"
             unit="%"
-            :selected="selected.province"
-            @select="value => (selected.province = value)"
           />
         </NeuCard>
 
@@ -173,8 +163,6 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
             :items="regions"
             metric="占比"
             unit="%"
-            :selected="selected.region"
-            @select="value => (selected.region = value)"
           />
         </NeuCard>
       </div>
@@ -194,8 +182,6 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
           :items="programs"
           metric="占比"
           unit="%"
-          :selected="selected.program"
-          @select="value => (selected.program = value)"
         />
       </NeuCard>
     </section>
@@ -209,13 +195,22 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
         </div>
       </div>
 
-      <div class="chart-grid">
+      <div class="chart-grid birthday-chart-grid">
         <NeuCard title="出生年份" subtitle="资料中保留的 07、08 年出生比例" badge="比例">
           <EChart :option="birthYearOption" height="320px" />
         </NeuCard>
 
         <NeuCard title="出生月份" subtitle="一年十二个月的生日分布" badge="饼图">
           <EChart :option="birthMonthOption" height="320px" />
+        </NeuCard>
+
+        <NeuCard title="生肖分布" subtitle="按农历春节边界计算的生肖比例" badge="饼图">
+          <div class="zodiac-chart">
+            <div class="zodiac-emoji-bg" aria-hidden="true">
+              <span v-for="item in chineseZodiac" :key="item.name" :class="['zodiac-emoji', `zodiac-emoji--${item.name}`]">{{ item.emoji }}</span>
+            </div>
+            <EChart :option="zodiacOption" height="320px" />
+          </div>
         </NeuCard>
       </div>
 
@@ -225,8 +220,6 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
           metric="同天生日人数"
           unit="人"
           :show-count="true"
-          :selected="selected.birthday"
-          @select="value => (selected.birthday = value)"
         />
       </NeuCard>
     </section>
@@ -245,8 +238,6 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
           :items="talents"
           metric="占比"
           unit="%"
-          :selected="selected.talent"
-          @select="value => (selected.talent = value)"
         />
       </NeuCard>
     </section>
@@ -267,8 +258,6 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
             metric="占比"
             unit="%"
             :show-count="true"
-            :selected="selected.ethnic"
-            @select="value => (selected.ethnic = value)"
           />
         </NeuCard>
 
@@ -277,8 +266,6 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
             :items="zodiacSigns"
             metric="占比"
             unit="%"
-            :selected="selected.zodiac"
-            @select="value => (selected.zodiac = value)"
           />
         </NeuCard>
 
@@ -287,8 +274,6 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
             :items="surnames"
             metric="占比"
             unit="%"
-            :selected="selected.surname"
-            @select="value => (selected.surname = value)"
           />
         </NeuCard>
 
@@ -297,12 +282,8 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
             <div class="phrase-summary">
               <p class="phrase-label">目标短语</p>
               <strong class="phrase-text">{{ namePhraseAnalysis.phrase }}</strong>
-              <p class="phrase-result">
-                <span class="phrase-result__mark">✕</span>
-                暂不能完整凑出
-              </p>
               <p class="phrase-note">
-                11 个不重复汉字中已有 {{ namePhraseAnalysis.coveredCharacters }} 个出现；“学”需 2 个，现有 1 个。
+                共有 {{ namePhraseAnalysis.matchingStudents }} 人的姓名中出现过这些字。
               </p>
             </div>
 
@@ -311,23 +292,15 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
                 <thead>
                   <tr>
                     <th>字</th>
-                    <th>需用</th>
-                    <th>出现</th>
+                    <th>出现人数</th>
                     <th>占比</th>
-                    <th>状态</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="item in namePhraseAnalysis.characters" :key="item.name">
                     <th scope="row" class="phrase-character">{{ item.name }}</th>
-                    <td>{{ item.required }}</td>
                     <td>{{ item.count }}</td>
                     <td>{{ item.value.toFixed(2) }}%</td>
-                    <td>
-                      <span :class="['phrase-status', item.count >= item.required ? 'is-ready' : 'is-missing']">
-                        {{ item.count >= item.required ? '满足' : '不足' }}
-                      </span>
-                    </td>
                   </tr>
                 </tbody>
               </table>

@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import * as echarts from 'echarts'
 import 'echarts-wordcloud'
 
@@ -7,16 +7,16 @@ const props = defineProps({
   items: { type: Array, required: true },
   metric: { type: String, default: '占比' },
   unit: { type: String, default: '%' },
-  selected: { type: String, default: '' },
   showCount: { type: Boolean, default: false },
   height: { type: String, default: '320px' }
 })
 
-const emit = defineEmits(['select'])
 const chartEl = ref(null)
 const hovered = ref(null)
 let chart = null
 let resizeObserver = null
+let renderFrame = 0
+let lastSize = ''
 
 const palette = [
   '#2457a6', '#187f72', '#d95f39', '#7a5aa6', '#d39b20',
@@ -43,24 +43,17 @@ function tooltipFormatter(params) {
   return `<div class="word-cloud-tooltip"><strong>${item.name}</strong><span>${formatValue(item)}${formatCount(item)}</span></div>`
 }
 
-function colorFor(item, index) {
-  if (props.selected && item.name === props.selected) return '#d95f39'
-  return item.textStyle?.color || palette[index % palette.length]
-}
-
 function getOption() {
   const items = sortedItems()
+  const width = chartEl.value?.clientWidth || 600
   const dense = items.length > 40
-  const canvasWidth = chartEl.value?.clientWidth || 600
-  const wide = canvasWidth > 700
+  const narrow = width < 500
   const hasLongLabels = items.some(item => String(item.name).length > 10)
-  const maxSize = dense ? 46 : hasLongLabels ? 42 : 58
-  const minSize = dense ? 12 : hasLongLabels ? 14 : 16
+  const maxSize = dense ? (narrow ? 28 : 46) : hasLongLabels ? (narrow ? 28 : 42) : (narrow ? 44 : 58)
+  const minSize = dense ? (narrow ? 9 : 12) : hasLongLabels ? (narrow ? 9 : 14) : (narrow ? 13 : 16)
 
   return {
-    animation: true,
-    animationDuration: 650,
-    animationDurationUpdate: 420,
+    animation: false,
     tooltip: {
       trigger: 'item',
       confine: true,
@@ -74,22 +67,22 @@ function getOption() {
     },
     series: [{
       type: 'wordCloud',
-      shape: wide ? 'square' : 'circle',
-      left: 'center',
-      top: 'center',
-      width: '94%',
-      height: '90%',
+      shape: width > 700 ? 'square' : 'circle',
+      left: 0,
+      top: 0,
+      width: '100%',
+      height: '100%',
       sizeRange: [minSize, maxSize],
       rotationRange: hasLongLabels ? [0, 0] : [-25, 25],
       rotationStep: 15,
-      gridSize: dense ? 5 : 8,
+      gridSize: dense ? (narrow ? 3 : 5) : (narrow ? 5 : 8),
       drawOutOfBound: false,
       shrinkToFit: true,
-      layoutAnimation: items.length < 80,
+      layoutAnimation: false,
       textStyle: {
         fontFamily: 'Inter, HarmonyOS Sans SC, PingFang SC, Microsoft YaHei, sans-serif',
         fontWeight: 750,
-        color: params => colorFor(params, items.findIndex(item => item.name === params.name))
+        color: params => params.data?.textStyle?.color || palette[items.findIndex(item => item.name === params.name) % palette.length]
       },
       emphasis: {
         focus: 'self',
@@ -104,8 +97,8 @@ function getOption() {
         value: Number(item.value),
         textStyle: {
           ...(item.textStyle || {}),
-          color: colorFor(item, index),
-          fontWeight: props.selected === item.name ? 900 : 750
+          color: item.textStyle?.color || palette[index % palette.length],
+          fontWeight: 750
         }
       }))
     }]
@@ -113,16 +106,25 @@ function getOption() {
 }
 
 function render() {
-  if (!chart) return
-  chart.setOption(getOption(), true)
-  chart.resize()
+  if (!chart || !chartEl.value?.clientWidth || !chartEl.value?.clientHeight) return
+  chart.clear()
+  chart.setOption(getOption(), { notMerge: true, lazyUpdate: false })
+  chart.resize({ animation: false })
 }
 
-function handleResize() {
-  render()
+function queueRender(force = false) {
+  cancelAnimationFrame(renderFrame)
+  renderFrame = requestAnimationFrame(() => {
+    const size = `${chartEl.value?.clientWidth || 0}x${chartEl.value?.clientHeight || 0}`
+    if (force || size !== lastSize) {
+      lastSize = size
+      render()
+    }
+  })
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
   chart = echarts.init(chartEl.value, null, { renderer: 'canvas' })
   chart.on('mouseover', params => {
     if (params.data) hovered.value = params.data
@@ -130,21 +132,21 @@ onMounted(() => {
   chart.on('mouseout', () => {
     hovered.value = null
   })
-  chart.on('click', params => {
-    if (params.data?.name != null) emit('select', params.data.name)
-  })
-  render()
-  resizeObserver = new ResizeObserver(handleResize)
+
+  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+  queueRender(true)
+  resizeObserver = new ResizeObserver(() => queueRender())
   resizeObserver.observe(chartEl.value)
 })
 
 watch(
-  () => [props.items, props.selected, props.metric, props.unit, props.showCount],
-  render,
+  () => [props.items, props.metric, props.unit, props.showCount],
+  () => queueRender(true),
   { deep: true }
 )
 
 onBeforeUnmount(() => {
+  cancelAnimationFrame(renderFrame)
   resizeObserver?.disconnect()
   chart?.dispose()
 })
@@ -164,7 +166,3 @@ onBeforeUnmount(() => {
     </div>
   </div>
 </template>
-
-
-
-
