@@ -1,5 +1,5 @@
 export const coverage = [
-  { label: '省份', value: 7, unit: '个', icon: 'map-pin' },
+  { label: '省份', value: 8, unit: '个', icon: 'map-pin' },
   { label: '考生地区', value: 98, unit: '个', icon: 'locate-fixed' },
   { label: '毕业学校名称', value: 206, unit: '所', icon: 'school' },
   { label: '录取专业项目', value: 9, unit: '个', icon: 'graduation-cap' },
@@ -18,6 +18,7 @@ export const politicalStatus = [
 
 export const provinces = [
   { name: '广东', value: 92.0 },
+  { name: '福建', value: 4.0 },
   { name: '江西', value: 1.6 },
   { name: '海南', value: 1.6 },
   { name: '湖南', value: 1.6 },
