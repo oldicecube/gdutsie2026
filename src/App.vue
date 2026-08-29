@@ -88,7 +88,6 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
   '#2457a6', '#416fba', '#5b86c4', '#759bd0', '#8bb3c2', '#7fb8a4',
   '#5f9c89', '#d95f39', '#df7c54', '#d39b20', '#b98d55', '#7a5aa6'
 ]))
-const zodiacOption = computed(() => donutOption(chineseZodiac, chineseZodiac.map(item => item.color)))
 </script>
 
 <template>
@@ -193,12 +192,24 @@ const zodiacOption = computed(() => donutOption(chineseZodiac, chineseZodiac.map
           <EChart :option="birthMonthOption" height="320px" />
         </NeuCard>
 
-        <NeuCard title="生肖分布" subtitle="按农历春节边界计算的生肖比例" badge="饼图">
-          <div class="zodiac-chart">
-            <div class="zodiac-emoji-bg" aria-hidden="true">
-              <span v-for="item in chineseZodiac" :key="item.name" :class="['zodiac-emoji', `zodiac-emoji--${item.name}`]">{{ item.emoji }}</span>
+        <NeuCard title="生肖分布" subtitle="按农历春节边界计算的生肖比例" badge="比例">
+          <div class="zodiac-table" role="list" aria-label="生肖比例">
+            <div
+              v-for="item in chineseZodiac"
+              :key="item.name"
+              class="zodiac-item"
+              role="listitem"
+              :style="{ '--zodiac-color': item.color }"
+            >
+              <div class="zodiac-item__emoji" aria-hidden="true">{{ item.emoji }}</div>
+              <div class="zodiac-item__body">
+                <div class="zodiac-item__name">{{ item.name }}年</div>
+                <div class="zodiac-item__value">{{ item.value.toFixed(1) }}<span>%</span></div>
+              </div>
+              <div class="zodiac-item__track" aria-hidden="true">
+                <span :style="{ width: `${Math.max(item.value, 1.5)}%` }"></span>
+              </div>
             </div>
-            <EChart :option="zodiacOption" height="320px" />
           </div>
         </NeuCard>
       </div>
