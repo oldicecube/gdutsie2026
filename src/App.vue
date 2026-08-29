@@ -88,6 +88,88 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
   '#2457a6', '#416fba', '#5b86c4', '#759bd0', '#8bb3c2', '#7fb8a4',
   '#5f9c89', '#d95f39', '#df7c54', '#d39b20', '#b98d55', '#7a5aa6'
 ]))
+
+const zodiacOption = computed(() => ({
+  color: chineseZodiac.map(item => item.color),
+  tooltip: {
+    ...tooltip,
+    formatter: params => `${params.name}\u5e74<br /><strong>${Number(params.value).toFixed(1)}%</strong>`
+  },
+  series: [
+    {
+      type: 'pie',
+      radius: ['0%', '62%'],
+      center: ['50%', '50%'],
+      avoidLabelOverlap: true,
+      itemStyle: {
+        borderColor: '#fffdf7',
+        borderWidth: 3,
+        borderRadius: 2
+      },
+      label: {
+        show: true,
+        position: 'outside',
+        color: '#39465a',
+        fontSize: 12,
+        fontWeight: 850,
+        lineHeight: 17,
+        formatter: params => `${params.name}\u5e74\n${Number(params.value).toFixed(1)}%`
+      },
+      labelLine: {
+        show: true,
+        length: 12,
+        length2: 22,
+        lineStyle: { color: '#8390a2', width: 2 }
+      },
+      labelLayout: {
+        hideOverlap: false,
+        moveOverlap: 'shiftY',
+        draggable: false
+      },
+      emphasis: {
+        scale: true,
+        scaleSize: 7,
+        label: { fontWeight: 950 }
+      },
+      data: chineseZodiac
+    },
+    {
+      type: 'pie',
+      radius: ['0%', '62%'],
+      center: ['50%', '50%'],
+      silent: true,
+      z: 3,
+      itemStyle: {
+        color: 'transparent',
+        borderWidth: 0
+      },
+      label: {
+        show: true,
+        position: 'inside',
+        formatter: params => params.data.emoji,
+        fontSize: 30,
+        lineHeight: 34,
+        align: 'center',
+        verticalAlign: 'middle',
+        overflow: 'none'
+      },
+      labelLine: { show: false },
+      labelLayout: {
+        hideOverlap: false,
+        moveOverlap: 'shiftY'
+      },
+      data: chineseZodiac.map(item => ({
+        ...item,
+        itemStyle: { color: 'transparent', borderWidth: 0 },
+        label: {
+          fontSize: item.value >= 10 ? 32 : item.value >= 1 ? 24 : 18,
+          lineHeight: item.value >= 10 ? 36 : item.value >= 1 ? 28 : 22
+        }
+      }))
+    }
+  ]
+}))
+
 </script>
 
 <template>
@@ -192,25 +274,8 @@ const birthMonthOption = computed(() => donutOption(birthMonths, [
           <EChart :option="birthMonthOption" height="320px" />
         </NeuCard>
 
-        <NeuCard title="生肖分布" subtitle="按农历春节边界计算的生肖比例" badge="比例">
-          <div class="zodiac-table" role="list" aria-label="生肖比例">
-            <div
-              v-for="item in chineseZodiac"
-              :key="item.name"
-              class="zodiac-item"
-              role="listitem"
-              :style="{ '--zodiac-color': item.color }"
-            >
-              <div class="zodiac-item__emoji" aria-hidden="true">{{ item.emoji }}</div>
-              <div class="zodiac-item__body">
-                <div class="zodiac-item__name">{{ item.name }}年</div>
-                <div class="zodiac-item__value">{{ item.value.toFixed(1) }}<span>%</span></div>
-              </div>
-              <div class="zodiac-item__track" aria-hidden="true">
-                <span :style="{ width: `${Math.max(item.value, 1.5)}%` }"></span>
-              </div>
-            </div>
-          </div>
+        <NeuCard title="生肖分布" subtitle="按农历春节边界计算；表情位于对应扇形内部" badge="饼图">
+          <EChart :option="zodiacOption" height="320px" />
         </NeuCard>
       </div>
 
